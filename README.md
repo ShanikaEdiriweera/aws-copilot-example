@@ -7,11 +7,16 @@ This is a sample AWS Copilot sample app. You can use AWS Copilot to deploy this 
 To deploy this app, clone this repo and then run:
 
 ```
-copilot init --app demo \
-  --name api \
-  --type "Load Balanced Web Service" \
-  --dockerfile "./Dockerfile" \
-  --deploy
+copilot app init --domain <domain>
+copilot init # init service1, test env and deploy
+copilot svc init
+copilot svc deploy --name service2 --env test
+copilot env init
+copilot env deploy --name dev
+copilot svc deploy --name service1 --env dev
+copilot svc deploy --name service2 --env dev
+opilot pipeline init -u https://github.com/ShanikaEdiriweera/aws-copilot-example -b main -n test-app-pipeline -p Workloads -e test,dev
+copilot pipeline deploy
 ```
 
 Copilot will set up the following resources in your account:
@@ -20,6 +25,9 @@ Copilot will set up the following resources in your account:
 * Application Load Balancer
 * Amazon ECR Repositories
 * ECS Cluster & Service running on AWS Fargate
+* Route53 DNS Records
+* ACM Certificates
+* CodePipeline
 
 ## Cleaning up
 
